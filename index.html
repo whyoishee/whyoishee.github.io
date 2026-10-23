@@ -46,16 +46,33 @@ body.celebrating{background:radial-gradient(ellipse at 50% 12%,rgba(255,229,166,
       .unit{font-size:.48rem;letter-spacing:.03em}
     }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
+@media (max-width: 600px) {
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  main {
+    width: min(100% - 24px, 520px);
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
 </style>
 </head>
 <body>
 <div class="ambient" aria-hidden="true"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
 <main>
-  <h1 id="headline">Oishee’s Birthday Is Coming Soon!</h1>
+  <h1 id="headline">Oishee's Birthday countdown</h1>
 
   <div class="cake-stage" aria-label="Birthday cake">
     <div class="cake" id="cake">🎂</div>
-    <div class="age-badge" id="ageBadge">17 years</div>
+    <div class="age-badge" id="ageBadge">currently 17y</div>
   </div>
 
   <section class="card" aria-live="polite">
@@ -141,8 +158,8 @@ body.celebrating{background:radial-gradient(ellipse at 50% 12%,rgba(255,229,166,
     const ageYear = celebrating ? now.getFullYear() :
       Math.max(FIRST_BIRTHDAY_YEAR, (now.getMonth() > MONTH || (now.getMonth() === MONTH && now.getDate() >= BIRTHDAY_DAY)) ? now.getFullYear() : now.getFullYear() - 1);
     const age = ageAtYear(ageYear);
-    $("ageBadge").textContent = age + " years";
-    $("headline").textContent = celebrating ? `Happy ${age}th Birthday Dear ${name()}` : `${name()}'s Birthday Is Coming Soon!`;
+    $("ageBadge").textContent = "currently " + age + "y";
+    $("headline").textContent = celebrating ? `Happy ${age}th Birthday Dear ${name()}` : `${name()}'s Birthday countdown`;
     $("dateLine").textContent = celebrating ? "" : `October 1, ${target.getFullYear()}`;
     $("dateLine").style.display = celebrating ? "none" : "block";
     $("timer").style.display = celebrating ? "none" : "grid";
